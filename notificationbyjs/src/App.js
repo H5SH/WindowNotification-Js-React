@@ -29,7 +29,7 @@ function App() {
     
     div.scrollTo(0, div.scrollHeight)
     // if (document.visibilityState !== "visible"){
-      // notification("Data")
+      notification("Data")
     // }
   
   }
@@ -41,15 +41,33 @@ function App() {
       if (Notification.permission === 'granted'){
         var notify = new Notification('Hello', {
             body: msg,
-            icon: 'https://bit.ly/2DYqRrh'
+            icon: 'favicon.ico',
+            image: 'logo192.png'
+          })
+          // setTimeout(()=>{
+          //   notify.close()
+          // },500)
+          // notify.addEventListener("show", (e)=>{
+          //   console.log("Inside Show")
+          //   console.log(e)
+          // })
+          notify.addEventListener("close", (e)=>{
+            console.log("Inside Close")
+            console.log(e)
+          })
+          notify.addEventListener("click", (e)=>{
+            console.log("Inside Click")
+            e.preventDefault()
+            console.log(e)
           })
       } else {
         Notification.requestPermission().then((permission)=>{
           if (permission === 'granted'){
             var notify = new Notification('Hello', {
               body: msg,
-              icon: 'https://bit.ly/2DYqRrh',
+              icon: 'favicon.ico',
             })
+            
           } else {
             console.log("User blocked")
           }
@@ -63,7 +81,7 @@ function App() {
 
   window.setInterval(()=>{
     incriment()
-  },7000)
+  },10000)
 
   useEffect(()=>{
     // incriment()
